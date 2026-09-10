@@ -1,0 +1,117 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* ── Warm light theme CSS variables ───────────────────────────────────────── */
+@layer base {
+  :root {
+    --background: 48 40% 97%;        /* warm cream parchment */
+    --foreground: 28 45% 9%;         /* rich dark brown */
+
+    --card: 0 0% 100%;               /* white */
+    --card-foreground: 28 45% 9%;
+
+    --popover: 0 0% 100%;
+    --popover-foreground: 28 45% 9%;
+
+    --primary: 34 75% 42%;           /* warm amber */
+    --primary-foreground: 48 40% 97%;
+
+    --secondary: 38 28% 92%;         /* warm sand */
+    --secondary-foreground: 28 30% 22%;
+
+    --muted: 38 22% 92%;
+    --muted-foreground: 30 14% 48%;
+
+    --accent: 15 52% 48%;            /* terracotta */
+    --accent-foreground: 0 0% 100%;
+
+    --destructive: 0 72% 51%;
+    --destructive-foreground: 0 0% 100%;
+
+    --border: 35 24% 86%;            /* warm sand border */
+    --input: 38 28% 92%;
+    --ring: 34 75% 42%;
+
+    --radius: 0.5rem;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+  body {
+    @apply bg-background text-foreground;
+    font-family: var(--font-sans), system-ui, sans-serif;
+  }
+  h1, h2, h3 {
+    font-family: var(--font-display), Georgia, serif;
+  }
+}
+
+/* ── Animations ───────────────────────────────────────────────────────────── */
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(8px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+@keyframes slideUp {
+  from { opacity: 0; transform: translateY(16px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+@keyframes shimmer {
+  0%   { background-position: -200% center; }
+  100% { background-position:  200% center; }
+}
+
+.animate-fade-in  { animation: fadeIn  0.35s ease both; }
+.animate-slide-up { animation: slideUp 0.4s ease both; }
+
+/* ── Gradient text (warm) ─────────────────────────────────────────────────── */
+.gradient-text {
+  background: linear-gradient(135deg, #b45309, #d97706, #c2410c);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+/* ── Flashcard flip ───────────────────────────────────────────────────────── */
+.card-flip-container {
+  perspective: 1000px;
+  height: 240px;
+}
+.card-flip-inner {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  transform-style: preserve-3d;
+  transition: transform 0.45s cubic-bezier(0.4, 0, 0.2, 1);
+}
+.card-flip-inner.flipped {
+  transform: rotateY(180deg);
+}
+.card-flip-front,
+.card-flip-back {
+  position: absolute;
+  inset: 0;
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.card-flip-back {
+  transform: rotateY(180deg);
+}
+
+/* ── Focus ring ───────────────────────────────────────────────────────────── */
+*:focus-visible {
+  outline: 2px solid hsl(var(--ring));
+  outline-offset: 2px;
+  border-radius: 6px;
+}
+
+/* ── Warm texture overlay ─────────────────────────────────────────────────── */
+.texture {
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='4' height='4'%3E%3Crect width='4' height='4' fill='none'/%3E%3Ccircle cx='1' cy='1' r='0.5' fill='%23c9b49a' opacity='0.18'/%3E%3C/svg%3E");
+}
